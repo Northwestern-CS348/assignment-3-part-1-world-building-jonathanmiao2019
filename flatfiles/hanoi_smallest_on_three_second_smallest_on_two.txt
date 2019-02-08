@@ -20,13 +20,40 @@ fact: (pred obj1 obj2)
 rule: ((pred obj1 obj2) (pred obj2 obj3)) -> (pred obj1 obj3)
 
 """
-
+# ============================== FACTS ===============================
+# Facts ON
 fact: (on disk1 peg3)
 fact: (on disk2 peg2)
 fact: (on disk3 peg1)
 fact: (on disk4 peg1)
 fact: (on disk5 peg1)
 
+# Facts Larger Than
+fact: (largerthan disk2 disk1)
+fact: (largerthan disk3 disk1)
+fact: (largerthan disk3 disk2)
+fact: (largerthan disk4 disk1)
+fact: (largerthan disk4 disk2)
+fact: (largerthan disk4 disk3)
+fact: (largerthan disk5 disk1)
+fact: (largerthan disk5 disk2)
+fact: (largerthan disk5 disk3)
+fact: (largerthan disk5 disk4)
+
+# Facts On Top
+fact: (ontop disk3 disk4)
+fact: (ontop disk4 disk5)
+
+# Facts Top, on which peg
+fact: (top disk1 peg3)
+fact: (top disk2 peg2)
+fact: (top disk3 peg1)
+
+# Facts Movable
 fact: (movable disk1 peg3 peg1)
 fact: (movable disk1 peg3 peg2)
 fact: (movable disk2 peg2 peg1)
+
+# ============================ RULES ================================
+rule: ((top ?a ?x) (isempty ?y)) -> (movable ?a ?x ?y)
+rule: ((top ?a ?x) (top b? y?) (largernthan ?b ?a)) -> (movable ?a ?x ?y)
