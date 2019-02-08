@@ -9,6 +9,85 @@ fact: (pred obj1 obj2)
 rule: ((pred obj1 obj2) (pred obj2 obj3)) -> (pred obj1 obj3)
 
 """
-
+# ==================================== FACT =======================================
+# Fact Movable
 fact: (movable tile4 pos2 pos1 pos3 pos1)
 fact: (movable tile8 pos3 pos2 pos3 pos1)
+
+# Fact Adjacent To
+fact: (adjto tile1 tile3)
+fact: (adjto tile1 tile4)
+fact: (adjto tile1 tile6)
+fact: (adjto tile1 tile8)
+
+fact: (adjto tile2 tile3)
+fact: (adjto tile2 tile6)
+
+fact: (adjto tile3 tile1)
+fact: (adjto tile3 tile2)
+fact: (adjto tile3 tile7)
+
+fact: (adjto tile4 tile1)
+fact: (adjto tile4 tile5)
+
+fact: (adjto tile5 tile4)
+fact: (adjto tile5 tile6)
+
+fact: (adjto tile6 tile1)
+fact: (adjto tile6 tile5)
+fact: (adjto tile6 tile7)
+
+fact: (adjto tile7 tile3)
+fact: (adjto tile7 tile6)
+
+fact: (adjto tile8 tile1)
+fact: (adjto tile8 tile2)
+
+# Fact Empty Tile (empty x_coord y_coord)
+fact: (emptypos empty pos3 x)
+fact: (emptypos empty pos1 y)
+
+# Fact Tile Position
+fact: (pos tile1 pos2 x)
+fact: (pos tile1 pos2 y)
+fact: (pos tile2 pos3 x)
+fact: (pos tile2 pos3 y)
+fact: (pos tile3 pos2 x)
+fact: (pos tile3 pos3 y)
+fact: (pos tile4 pos2 x)
+fact: (pos tile4 pos1 y)
+fact: (pos tile5 pos1 x)
+fact: (pos tile5 pos1 y)
+fact: (pos tile6 pos1 x)
+fact: (pos tile6 pos2 y)
+fact: (pos tile7 pos1 x)
+fact: (pos tile7 pos3 y)
+fact: (pos tile8 pos3 x)
+fact: (pos tile8 pos2 y)
+
+# Fact Tile HasTwo
+fact: (hastwo tile1 x)
+fact: (hastwo tile1 y)
+fact: (hastwo tile3 x)
+fact: (hastwo tile4 x)
+fact: (hastwo tile6 y)
+fact: (hastwo tile8 y)
+
+# Fact Tile NoTwo
+fact: (notwo tile2 x)
+fact: (notwo tile2 y)
+fact: (notwo tile3 y)
+fact: (notwo tile4 y)
+fact: (notwo tile5 x)
+fact: (notwo tile5 y)
+fact: (notwo tile6 x)
+fact: (notwo tile7 x)
+fact: (notwo tile7 y)
+fact: (notwo tile8 x)
+
+# =============================== RULES ==================================
+rule: ((pos ?a ?j ?x) (pos ?b ?j ?x) (notwo ?a ?y) (hastwo ?b ?y)) -> (adjto ?a ?b)
+rule: ((pos ?a ?j ?x) (pos ?b ?j ?x) (hastwo ?a ?y) (notwo ?b ?y)) -> (adjto ?a ?b)
+rule: ((adjto ?a ?b) (pos ?a ?q ?x) (pos ?a ?w ?y) (posempty ?b ?j ?x) (posempty ?b ?k ?y)) -> (movable ?a ?q ?w ?j ?k)
+
+
